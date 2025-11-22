@@ -499,6 +499,8 @@ jobs:
           llvm: 'true'
       - name: Test models (llvm)
         run: CPU=1 CPU_LLVM=1 python -m pytest -n=auto test/models --durations=20
+      - name: Test LLama 1B tiny vs torch
+        run: CPU=1 CPU_LLVM=1 python -m test.external.external_benchmark_llama_1b_cpu
       - name: Test models (opencl)
         run: CL=1 python -m pytest -n=auto test/models --durations=20
       - name: Test models (cpu)
