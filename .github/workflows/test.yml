@@ -31,6 +31,8 @@ jobs:
       run: CPU=1 CPU_LLVM=1 python3 test/speed/external_test_speed_v_torch.py
     - name: Speed Test (BEAM=2)
       run: BEAM=2 CPU=1 CPU_LLVM=1 python3 test/speed/external_test_speed_v_torch.py
+    - name: Test LLama 1B tiny vs torch
+      run: CPU=1 CPU_LLVM=1 python3 test/external/external_benchmark_llama_1b_cpu.py
 
   docs:
     name: Docs
@@ -499,8 +501,6 @@ jobs:
           llvm: 'true'
       - name: Test models (llvm)
         run: CPU=1 CPU_LLVM=1 python -m pytest -n=auto test/models --durations=20
-      - name: Test LLama 1B tiny vs torch
-        run: CPU=1 CPU_LLVM=1 python -m test.external.external_benchmark_llama_1b_cpu
       - name: Test models (opencl)
         run: CL=1 python -m pytest -n=auto test/models --durations=20
       - name: Test models (cpu)
