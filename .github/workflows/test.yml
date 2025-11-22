@@ -31,6 +31,20 @@ jobs:
       run: CPU=1 CPU_LLVM=1 python3 test/speed/external_test_speed_v_torch.py
     - name: Speed Test (BEAM=2)
       run: BEAM=2 CPU=1 CPU_LLVM=1 python3 test/speed/external_test_speed_v_torch.py
+  
+  comparellvmspeed:
+    name: Compare LLVM Speed
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    - name: Setup Environment
+      uses: ./.github/actions/setup-tinygrad
+      with:
+        key: compare-llvm-speed
+        deps: testing
+        llvm: 'true'
     - name: Test LLama 1B tiny vs torch
       run: CPU=1 CPU_LLVM=1 python3 test/external/external_benchmark_llama_1b_cpu.py
 
